@@ -14,7 +14,7 @@ spec:
     runAsNonRoot: true
   containers:
     - name: test
-      image: public.ecr.aws/r2l1x4g2/go-http-server:v0.1.0-23ffe0a715
+      image: nginxinc/nginx-unprivileged:latest
       imagePullPolicy: IfNotPresent
       ports:
       - containerPort: 8080

@@ -1,8 +1,8 @@
-# Pod Security Admission (PSA) Testing for Kubernetes 1.23
+# Pod Security Admission (PSA) Testing for Kubernetes 1.24
 
 ## Testing Summary
 
-Several test scenarios were executed against a Kubernetes 1.23 cluster, with [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) and [Pod Security Standards (PSS)](https://kubernetes.io/docs/concepts/security/pod-security-standards/) _Privileged_ profile enabled by default. The testing was designed to exercise different PSA modes and PSS profiles, while producing the following responses:
+Several test scenarios were executed against a Kubernetes 1.24 cluster, with [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) and [Pod Security Standards (PSS)](https://kubernetes.io/docs/concepts/security/pod-security-standards/) _Privileged_ profile enabled by default. The testing was designed to exercise different PSA modes and PSS profiles, while producing the following responses:
 
 * Allowing Pods that meet profile requirements
 * Disallowing pods that don’t meet profile requirements
@@ -14,9 +14,9 @@ Several test scenarios were executed against a Kubernetes 1.23 cluster, with [Po
 
 ## Testing Outcomes
 
-* PSA functions correctly in Kubernetes 1.23
-* PSS profiles (Privileged, Baseline, and Restricted) function as expected in Kubenetes 1.23
-* PSA modes (audit, enforce, and warn) function as expected in Kubernetes 1.23
+* PSA functions correctly in Kubernetes 1.24
+* PSS profiles (Privileged, Baseline, and Restricted) function as expected in Kubenetes 1.24
+* PSA modes (audit, enforce, and warn) function as expected in Kubernetes 1.24:
 
 ## Testing Assumptions
 

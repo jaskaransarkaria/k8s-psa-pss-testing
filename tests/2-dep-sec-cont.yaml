@@ -5,9 +5,8 @@ metadata:
   namespace: policy-test
   labels:
     app: test
-    owner: jimmy
+    owner: cloud-platform
     env: dev
-    billing: lob-cc
 spec:
   selector:
     matchLabels:
@@ -22,13 +21,12 @@ spec:
     metadata:
       labels:
         app: test
-        owner: jimmy
+        owner: cloud-platform
         env: dev
-        billing: lob-cc
     spec: 
       containers:
       - name: test
-        image: public.ecr.aws/r2l1x4g2/go-http-server:v0.1.0-23ffe0a715
+        image: nginxinc/nginx-unprivileged:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
