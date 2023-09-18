@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: test
-  namespace: policy-test
+  namespace: starter-pack-0
   labels:
     app: test
     owner: cloud-platform

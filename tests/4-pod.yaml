@@ -5,7 +5,7 @@ metadata:
   namespace: starter-pack-0
   labels:
     app: test
-    owner: jimmy
+    owner: cloud-platform
     env: dev
     billing: lob-cc
 spec:
