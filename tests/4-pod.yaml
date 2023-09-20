@@ -7,7 +7,6 @@ metadata:
     app: test
     owner: cloud-platform
     env: dev
-    billing: lob-cc
 spec:
   securityContext:  
     runAsUser: 1000  
