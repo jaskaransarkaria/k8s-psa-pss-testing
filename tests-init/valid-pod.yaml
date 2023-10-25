@@ -7,13 +7,12 @@ spec:
   securityContext:
     supplementalGroups:
       - 2
-
   containers:
     - image: nginxinc/nginx-unprivileged:latest
       securityContext:
         allowPrivilegeEscalation: false
-
       name: nginx
       ports:
         - containerPort: 80
+
 

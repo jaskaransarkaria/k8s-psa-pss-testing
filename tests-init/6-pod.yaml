@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: test-6
+  name: init-test-6
   namespace: starter-pack-0
   labels:
     app: test
@@ -24,6 +24,44 @@ spec:
           drop: ["ALL"]  
         seccompProfile:
           type: "RuntimeDefault"
+      ports:
+      - containerPort: 8080
+      resources:  
+        limits:  
+          cpu: 200m  
+          memory: 20Mi  
+        requests:  
+          cpu: 100m  
+          memory: 10Mi  
+      readinessProbe:
+        tcpSocket:
+          port: 8080
+        initialDelaySeconds: 5
+        periodSeconds: 10
+      livenessProbe:
+        tcpSocket:
+          port: 8080
+        initialDelaySeconds: 15
+        periodSeconds: 20
+      volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+  volumes:
+  - name: tmp
+    emptyDir: {}
+  - name: init-test-6-init
+    image: nginxinc/nginx-unprivileged:latest
+    imagePullPolicy: IfNotPresent
+    command: ['sh', '-c', 'echo "Hello, Init Nginx!" > /tmp/init_index.html']
+    securityContext:  
+      allowPrivilegeEscalation: false  
+      runAsUser: 1000  
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      capabilities:
+        drop: ["ALL"]  
+      seccompProfile:
+        type: "RuntimeDefault"
       ports:
       - containerPort: 8080
       resources:  

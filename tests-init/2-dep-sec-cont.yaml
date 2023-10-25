@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-2
+  name: init-test-2
   namespace: starter-pack-0
   labels:
     app: test
@@ -53,3 +53,8 @@ spec:
       volumes:
       - name: tmp
         emptyDir: {}
+      initContainers:
+      - name: init-test-2-init
+        image: nginxinc/nginx-unprivileged:latest
+        imagePullPolicy: IfNotPresent
+        command: ['sh', '-c', 'echo "Hello, Init Nginx!" > /tmp/init_index.html']
