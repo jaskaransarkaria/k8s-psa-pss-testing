@@ -62,4 +62,18 @@ spec:
       volumes:
       - name: tmp
         emptyDir: {}
+      initContainers:
+      - name: init-test
+        image: nginxinc/nginx-unprivileged:latest
+        imagePullPolicy: IfNotPresent
+        securityContext:  
+          allowPrivilegeEscalation: false  
+          runAsUser: 1000  
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          capabilities:
+            drop: ["ALL"]  
+          seccompProfile:
+            type: "RuntimeDefault"
+        command: ['sh', '-c', 'echo The app is running! && sleep 10']
 

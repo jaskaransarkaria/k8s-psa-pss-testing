@@ -8,9 +8,6 @@ metadata:
     owner: cloud-platform
     env: dev
 spec:
-  hostNetwork: true
-  hostPID: true
-  hostIPC: true
   containers:
     - name: test
       image: nginxinc/nginx-unprivileged:latest
@@ -21,9 +18,7 @@ spec:
         readOnlyRootFilesystem: true
         runAsNonRoot: true
         capabilities:
-          drop: ["ALL"]  
-        seccompProfile:
-          type: "RuntimeDefault"
+          add: ["NET_ADMIN", "SYS_TIME"]
       ports:
       - containerPort: 8080
       resources:  
@@ -56,10 +51,9 @@ spec:
         readOnlyRootFilesystem: true
         runAsNonRoot: true
         capabilities:
-          drop: ["ALL"]  
-        seccompProfile:
-          type: "RuntimeDefault"
+          add: ["NET_ADMIN", "SYS_TIME"]
       command: ['sh', '-c', 'echo The app is running! && sleep 10']
   volumes:
   - name: tmp
     emptyDir: {}
+

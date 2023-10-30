@@ -13,10 +13,10 @@ SERVICEACCOUNT_TOKEN=$1
 echo "${NEWLINE}"
 
 
-if [[ -z "$SERVICEACCOUNT_TOKEN" ]]; then
-    echo "Pass you service account token in ./tests.sh <service_account_token>"
-    exit 1
-fi
+# if [[ -z "$SERVICEACCOUNT_TOKEN" ]]; then
+#     echo "Pass you service account token in ./tests.sh <service_account_token>"
+#     exit 1
+# fi
 
 echo ">>> 1. Good config..."
 "${CMD_KUBECTL}" apply -f "${PREFIX}"1-ok.yaml --token="${SERVICEACCOUNT_TOKEN}"
@@ -61,4 +61,10 @@ sleep 2
 
 echo "${NEWLINE}"
 
+echo ">>> 7. Pod - Container security context element present, with incorrect spec.containers[*].capabilities.add"
+"${CMD_KUBECTL}" apply -f "${PREFIX}"7-pod.yaml --token="${SERVICEACCOUNT_TOKEN}"
+"${CMD_KUBECTL}" delete -f "${PREFIX}"7-pod.yaml
+sleep 2
+
+echo "${NEWLINE}"
 exit 0

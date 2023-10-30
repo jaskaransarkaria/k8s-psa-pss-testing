@@ -53,3 +53,8 @@ spec:
       volumes:
       - name: tmp
         emptyDir: {}
+      initContainers:
+      - name: init-test
+        image: nginxinc/nginx-unprivileged:latest
+        imagePullPolicy: IfNotPresent
+        command: ['sh', '-c', 'echo The app is running! && sleep 10']

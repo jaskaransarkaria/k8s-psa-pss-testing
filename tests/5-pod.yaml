@@ -43,6 +43,20 @@ spec:
       volumeMounts:
         - mountPath: /tmp
           name: tmp
+  initContainers:
+    - name: init-test
+      image: nginxinc/nginx-unprivileged:latest
+      imagePullPolicy: IfNotPresent
+      command: ['sh', '-c', 'echo The app is running! && sleep 10']
+      securityContext:  
+        allowPrivilegeEscalation: true  
+        runAsUser: 1000  
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        capabilities:
+          drop: ["ALL"]  
+        seccompProfile:
+          type: "RuntimeDefault"
   volumes:
   - name: tmp
     emptyDir: {}

@@ -34,6 +34,11 @@ spec:
       volumeMounts:
         - mountPath: /tmp
           name: tmp
+  initContainers:
+    - name: init-test
+      image: nginxinc/nginx-unprivileged:latest
+      imagePullPolicy: IfNotPresent
+      command: ['sh', '-c', 'echo The app is running! && sleep 10']
   volumes:
   - name: tmp
     emptyDir: {}

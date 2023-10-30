@@ -1,0 +1,116 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"name":"nginx","namespace":"starter-pack-0"},"spec":{"containers":[{"image":"nginxinc/nginx-unprivileged:latest","name":"nginx","ports":[{"containerPort":80}],"securityContext":{"allowPrivilegeEscalation":false}}],"securityContext":{"supplementalGroups":[2]}}}
+    kubernetes.io/psp: restricted
+    seccomp.security.alpha.kubernetes.io/pod: runtime/default
+  creationTimestamp: "2023-09-20T09:54:58Z"
+  name: nginx
+  namespace: starter-pack-0
+  resourceVersion: "57493"
+  uid: 1d32c458-a780-4484-92f8-9dbb5ba4204f
+spec:
+  containers:
+  - image: nginxinc/nginx-unprivileged:latest
+    imagePullPolicy: Always
+    name: nginx
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-nfw7p
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: ip-172-20-40-101.eu-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  priorityClassName: default
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1
+    seccompProfile:
+      type: RuntimeDefault
+    supplementalGroups:
+    - 2
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-nfw7p
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-20T09:54:58Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-20T09:55:01Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-20T09:55:01Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-20T09:54:58Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://169df606bb8dbd9a9c364273cba02795526ffd4fc59a79858a315a2619134de0
+    image: docker.io/nginxinc/nginx-unprivileged:latest
+    imageID: docker.io/nginxinc/nginx-unprivileged@sha256:be4590dc897a62c4ae2d388604d88afb6d139e24202611a200c9f29d137c173d
+    lastState: {}
+    name: nginx
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-20T09:55:00Z"
+  hostIP: 172.20.40.101
+  phase: Running
+  podIP: 172.20.36.35
+  podIPs:
+  - ip: 172.20.36.35
+  qosClass: BestEffort
+  startTime: "2023-09-20T09:54:58Z"
