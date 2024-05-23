@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: test-3
+  name: init-test-3
   namespace: starter-pack-0
   labels:
     app: test
@@ -34,11 +34,14 @@ spec:
       volumeMounts:
         - mountPath: /tmp
           name: tmp
-  initContainers:
-    - name: init-test
-      image: nginxinc/nginx-unprivileged:latest
-      imagePullPolicy: IfNotPresent
-      command: ['sh', '-c', 'echo The app is running! && sleep 10']
   volumes:
   - name: tmp
     emptyDir: {}
+  initContainers:
+  - name: init-test-3-init
+    image: nginxinc/nginx-unprivileged:latest
+    imagePullPolicy: IfNotPresent
+    command: ['sh', '-c', 'echo "Hello, Init Nginx!" > /tmp/init_index.html']
+    volumeMounts:
+      - mountPath: /tmp
+        name: tmp
